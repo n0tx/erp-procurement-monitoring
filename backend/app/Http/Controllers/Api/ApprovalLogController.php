@@ -3,47 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ApprovalLog;
+use App\Http\Resources\ApprovalLogResource;
 use Illuminate\Http\Request;
 
 class ApprovalLogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $query = ApprovalLog::with('actor');
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($request->has('reference_type')) {
+            $query->where('reference_type', $request->reference_type);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if ($request->has('reference_id')) {
+            $query->where('reference_id', $request->reference_id);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $logs = $query->orderBy('acted_at', 'desc')->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => 'Approval Logs retrieved successfully',
+            'data' => ApprovalLogResource::collection($logs)
+        ]);
     }
 }
