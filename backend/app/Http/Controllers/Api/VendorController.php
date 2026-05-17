@@ -3,47 +3,62 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Vendor;
+use App\Http\Requests\StoreVendorRequest;
+use App\Http\Requests\UpdateVendorRequest;
+use App\Http\Resources\VendorResource;
 
 class VendorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $vendors = Vendor::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Vendors retrieved successfully',
+            'data' => VendorResource::collection($vendors)
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreVendorRequest $request)
     {
-        //
+        $vendor = Vendor::create($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vendor created successfully',
+            'data' => new VendorResource($vendor)
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Vendor $vendor)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => 'Vendor retrieved successfully',
+            'data' => new VendorResource($vendor)
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateVendorRequest $request, Vendor $vendor)
     {
-        //
+        $vendor->update($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vendor updated successfully',
+            'data' => new VendorResource($vendor)
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Vendor $vendor)
     {
-        //
+        $vendor->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vendor deleted successfully',
+            'data' => null
+        ]);
     }
 }

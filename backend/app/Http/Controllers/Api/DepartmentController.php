@@ -3,47 +3,62 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Department;
+use App\Http\Requests\StoreDepartmentRequest;
+use App\Http\Requests\UpdateDepartmentRequest;
+use App\Http\Resources\DepartmentResource;
 
 class DepartmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $departments = Department::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Departments retrieved successfully',
+            'data' => DepartmentResource::collection($departments)
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {
-        //
+        $department = Department::create($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Department created successfully',
+            'data' => new DepartmentResource($department)
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Department $department)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => 'Department retrieved successfully',
+            'data' => new DepartmentResource($department)
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        //
+        $department->update($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Department updated successfully',
+            'data' => new DepartmentResource($department)
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Department $department)
     {
-        //
+        $department->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Department deleted successfully',
+            'data' => null
+        ]);
     }
 }

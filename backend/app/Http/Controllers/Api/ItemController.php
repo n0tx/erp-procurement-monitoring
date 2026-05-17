@@ -3,47 +3,62 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Http\Requests\StoreItemRequest;
+use App\Http\Requests\UpdateItemRequest;
+use App\Http\Resources\ItemResource;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $items = Item::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Items retrieved successfully',
+            'data' => ItemResource::collection($items)
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreItemRequest $request)
     {
-        //
+        $item = Item::create($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Item created successfully',
+            'data' => new ItemResource($item)
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Item $item)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => 'Item retrieved successfully',
+            'data' => new ItemResource($item)
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        $item->update($request->validated());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Item updated successfully',
+            'data' => new ItemResource($item)
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Item $item)
     {
-        //
+        $item->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Item deleted successfully',
+            'data' => null
+        ]);
     }
 }
