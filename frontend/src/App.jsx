@@ -9,6 +9,7 @@ import VendorQuotationsList from './pages/VendorQuotationsList';
 import VendorQuotationDetail from './pages/VendorQuotationDetail';
 import PurchaseOrdersList from './pages/PurchaseOrdersList';
 import PurchaseOrderDetail from './pages/PurchaseOrderDetail';
+import ApprovalLogsList from './pages/ApprovalLogsList';
 import Placeholder from './components/Placeholder';
 import useAuthStore from './store/authStore';
 
@@ -69,7 +70,7 @@ function App() {
         {/* Placeholder Routes for Sidebar Menus */}
         <Route path="projects" element={<Placeholder />} />
         <Route path="vendors" element={<Placeholder />} />
-        <Route path="approval-logs" element={<Placeholder />} />
+        <Route path="approval-logs" element={<ApprovalLogsList />} />
       </Route>
       
       {/* Fallback route */}
