@@ -40,7 +40,7 @@ class PurchaseOrderService
 
             // Generate PO Number
             $count = PurchaseOrder::count() + 1;
-            $poNumber = 'PO-' . date('Ym') . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
+            $poNumber = 'PO-EPC-' . date('Ym') . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
 
             $po = PurchaseOrder::create([
                 'po_number' => $poNumber,

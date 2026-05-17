@@ -47,32 +47,32 @@ class DatabaseSeeder extends Seeder
 
         /*
         |--------------------------------------------------------------------------
-        | USERS (MULTIFAB DEMO)
+        | USERS (GENERIC EPC DEMO)
         |--------------------------------------------------------------------------
         */
 
-        $admin = User::firstOrCreate(['email' => 'admin@multifab.co.id'], [
+        $admin = User::firstOrCreate(['email' => 'admin@demo-epc.com'], [
             'name' => 'System Admin',
             'password' => Hash::make('password'),
             'department_id' => $procurementDept->id,
         ]);
         $admin->assignRole($adminRole);
 
-        $projectUser = User::firstOrCreate(['email' => 'project@multifab.co.id'], [
+        $projectUser = User::firstOrCreate(['email' => 'project@demo-epc.com'], [
             'name' => 'Site Engineer',
             'password' => Hash::make('password'),
             'department_id' => $projectDept->id,
         ]);
         $projectUser->assignRole($projectUserRole);
 
-        $approver = User::firstOrCreate(['email' => 'manager@multifab.co.id'], [
+        $approver = User::firstOrCreate(['email' => 'manager@demo-epc.com'], [
             'name' => 'Project Manager',
             'password' => Hash::make('password'),
             'department_id' => $projectDept->id,
         ]);
         $approver->assignRole($approverRole);
 
-        $procurement = User::firstOrCreate(['email' => 'procurement@multifab.co.id'], [
+        $procurement = User::firstOrCreate(['email' => 'procurement@demo-epc.com'], [
             'name' => 'Procurement Specialist',
             'password' => Hash::make('password'),
             'department_id' => $procurementDept->id,
@@ -161,7 +161,7 @@ class DatabaseSeeder extends Seeder
         */
 
         $pr1 = PurchaseRequest::create([
-            'pr_number' => 'PR-MFG-' . date('Ym') . '-001',
+            'pr_number' => 'PR-EPC-' . date('Ym') . '-0001',
             'project_id' => $project2->id, // Fabrikasi Pressure Vessel
             'department_id' => $manufacturingDept->id,
             'requested_by' => $projectUser->id,
@@ -221,7 +221,7 @@ class DatabaseSeeder extends Seeder
         $quotation1 = VendorQuotation::create([
             'purchase_request_id' => $pr1->id,
             'vendor_id' => $vendor1->id, // Krakatau Steel
-            'quotation_number' => 'QT-KS-' . date('Ym') . '-001',
+            'quotation_number' => 'QT-EPC-' . date('Ym') . '-0001',
             'quotation_date' => now()->subDays(5),
             'total_amount' => 174500000,
             'status' => 'selected',
@@ -260,7 +260,7 @@ class DatabaseSeeder extends Seeder
         */
 
         $po1 = PurchaseOrder::create([
-            'po_number' => 'PO-MFG-' . date('Ym') . '-001',
+            'po_number' => 'PO-EPC-' . date('Ym') . '-0001',
             'purchase_request_id' => $pr1->id,
             'vendor_id' => $vendor1->id,
             'po_date' => now()->subDays(3),

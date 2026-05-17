@@ -21,7 +21,7 @@ class PurchaseRequestService
         return DB::transaction(function () use ($data) {
             // Generate PR Number
             $count = PurchaseRequest::count() + 1;
-            $prNumber = 'PR-' . date('Ym') . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
+            $prNumber = 'PR-EPC-' . date('Ym') . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
 
             $pr = PurchaseRequest::create([
                 'pr_number' => $prNumber,

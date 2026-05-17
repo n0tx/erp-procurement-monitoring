@@ -27,7 +27,7 @@ class VendorQuotationService
 
             // Generate Quotation Number
             $count = VendorQuotation::count() + 1;
-            $quotationNumber = 'VQ-' . date('Ym') . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
+            $quotationNumber = 'QT-EPC-' . date('Ym') . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
 
             $quotation = VendorQuotation::create([
                 'purchase_request_id' => $data['purchase_request_id'],
