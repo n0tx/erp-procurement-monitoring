@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('approval_logs', function (Blueprint $table) {
             $table->id();
+            $table->string('reference_type'); // purchase_request, vendor_quotation, purchase_order
+            $table->unsignedBigInteger('reference_id');
+            $table->string('action'); // submitted, approved, rejected, selected_vendor, issued_po, closed_po
+            $table->text('notes')->nullable();
+            $table->foreignId('acted_by')->constrained('users')->onDelete('cascade');
+            $table->timestamp('acted_at');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('approval_logs');

@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('vendor_quotation_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('vendor_quotation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('item_id')->constrained()->onDelete('cascade');
+            $table->decimal('qty', 10, 2);
+            $table->decimal('price', 15, 2)->default(0);
+            $table->decimal('subtotal', 15, 2)->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('vendor_quotation_details');
