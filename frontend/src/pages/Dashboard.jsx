@@ -45,7 +45,7 @@ const Dashboard = () => {
   const statCards = [
     {
       title: 'Total PRs',
-      value: data?.total_purchase_requests || 0,
+      value: data?.total_pr || 0,
       icon: ShoppingCart,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
@@ -53,7 +53,7 @@ const Dashboard = () => {
     },
     {
       title: 'Pending Approval',
-      value: data?.pending_pr_approval || 0,
+      value: data?.pending_approval || 0,
       icon: Activity,
       color: 'text-amber-600',
       bgColor: 'bg-amber-50',
@@ -61,7 +61,7 @@ const Dashboard = () => {
     },
     {
       title: 'Approved PRs',
-      value: data?.approved_prs || 0,
+      value: data?.approved_pr || 0,
       icon: CheckCircle,
       color: 'text-emerald-600',
       bgColor: 'bg-emerald-50',
@@ -73,15 +73,15 @@ const Dashboard = () => {
       icon: FileText,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
-      link: '/vendor-quotations'
+      link: '/vendor-quotations?status=pending'
     },
     {
       title: 'Issued POs',
-      value: data?.issued_pos || 0,
+      value: data?.issued_po || 0,
       icon: Package,
       color: 'text-indigo-600',
       bgColor: 'bg-indigo-50',
-      link: '/purchase-orders'
+      link: '/purchase-orders?status=issued'
     },
   ];
 

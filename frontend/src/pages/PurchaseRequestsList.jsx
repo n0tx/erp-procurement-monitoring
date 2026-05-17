@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import api from '../services/api';
 import { 
   Plus, 
@@ -31,10 +31,13 @@ const StatusBadge = ({ status }) => {
 };
 
 const PurchaseRequestsList = () => {
+  const [searchParams] = useSearchParams();
+  const initialStatus = searchParams.get('status') || 'all';
+  
   const [prs, setPrs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState(initialStatus);
 
   useEffect(() => {
     fetchPRs();
