@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import PurchaseRequestsList from './pages/PurchaseRequestsList';
 import PurchaseRequestDetail from './pages/PurchaseRequestDetail';
 import PurchaseRequestForm from './pages/PurchaseRequestForm';
+import VendorQuotationsList from './pages/VendorQuotationsList';
+import VendorQuotationDetail from './pages/VendorQuotationDetail';
 import Placeholder from './components/Placeholder';
 import useAuthStore from './store/authStore';
 
@@ -57,9 +59,10 @@ function App() {
         <Route path="purchase-requests" element={<PurchaseRequestsList />} />
         <Route path="purchase-requests/create" element={<PurchaseRequestForm />} />
         <Route path="purchase-requests/:id" element={<PurchaseRequestDetail />} />
+        <Route path="vendor-quotations" element={<VendorQuotationsList />} />
+        <Route path="vendor-quotations/:id" element={<VendorQuotationDetail />} />
         
         {/* Placeholder Routes for Sidebar Menus */}
-        <Route path="vendor-quotations" element={<Placeholder />} />
         <Route path="purchase-orders" element={<Placeholder />} />
         <Route path="projects" element={<Placeholder />} />
         <Route path="vendors" element={<Placeholder />} />
