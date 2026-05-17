@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import PurchaseRequestsList from './pages/PurchaseRequestsList';
+import PurchaseRequestDetail from './pages/PurchaseRequestDetail';
 import Placeholder from './components/Placeholder';
 import useAuthStore from './store/authStore';
 
@@ -53,6 +54,7 @@ function App() {
         
         {/* Module Routes */}
         <Route path="purchase-requests" element={<PurchaseRequestsList />} />
+        <Route path="purchase-requests/:id" element={<PurchaseRequestDetail />} />
         
         {/* Placeholder Routes for Sidebar Menus */}
         <Route path="vendor-quotations" element={<Placeholder />} />
