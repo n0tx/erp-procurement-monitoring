@@ -30,20 +30,20 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Purchase Requests
     Route::apiResource('purchase-requests', PurchaseRequestController::class);
-    Route::post('purchase-requests/{id}/submit', [PurchaseRequestController::class, 'submit']);
-    Route::post('purchase-requests/{id}/approve', [PurchaseRequestController::class, 'approve']);
-    Route::post('purchase-requests/{id}/reject', [PurchaseRequestController::class, 'reject']);
+    Route::post('purchase-requests/{purchase_request}/submit', [PurchaseRequestController::class, 'submit']);
+    Route::post('purchase-requests/{purchase_request}/approve', [PurchaseRequestController::class, 'approve']);
+    Route::post('purchase-requests/{purchase_request}/reject', [PurchaseRequestController::class, 'reject']);
 
     // Vendor Quotations
     Route::apiResource('vendor-quotations', VendorQuotationController::class);
-    Route::post('vendor-quotations/{id}/select', [VendorQuotationController::class, 'select']);
-    Route::post('vendor-quotations/{id}/reject', [VendorQuotationController::class, 'reject']);
+    Route::post('vendor-quotations/{vendor_quotation}/select', [VendorQuotationController::class, 'select']);
+    Route::post('vendor-quotations/{vendor_quotation}/reject', [VendorQuotationController::class, 'reject']);
 
     // Purchase Orders
     Route::apiResource('purchase-orders', PurchaseOrderController::class);
-    Route::post('purchase-orders/{id}/issue', [PurchaseOrderController::class, 'issue']);
-    Route::post('purchase-orders/{id}/deliver', [PurchaseOrderController::class, 'deliver']);
-    Route::post('purchase-orders/{id}/close', [PurchaseOrderController::class, 'close']);
+    Route::post('purchase-orders/{purchase_order}/issue', [PurchaseOrderController::class, 'issue']);
+    Route::post('purchase-orders/{purchase_order}/deliver', [PurchaseOrderController::class, 'deliver']);
+    Route::post('purchase-orders/{purchase_order}/close', [PurchaseOrderController::class, 'close']);
 
     // Dashboard
     Route::get('dashboard/procurement', [DashboardController::class, 'procurement']);
