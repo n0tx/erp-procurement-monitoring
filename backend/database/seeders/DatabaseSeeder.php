@@ -293,5 +293,62 @@ class DatabaseSeeder extends Seeder
             'acted_by' => $procurement->id,
             'acted_at' => now()->subDays(3),
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | ADDITIONAL PURCHASE REQUESTS (DRAFT & SUBMITTED FOR TESTING)
+        |--------------------------------------------------------------------------
+        */
+
+        // PR 2: Submitted (Waiting for Approval)
+        $pr2 = PurchaseRequest::create([
+            'pr_number' => 'PR-EPC-' . date('Ym') . '-0002',
+            'project_id' => $project1->id, // PLTU Lontar
+            'department_id' => $engineeringDept->id,
+            'requested_by' => $projectUser->id,
+            'request_date' => now()->subDays(2),
+            'status' => 'submitted',
+            'notes' => 'Permintaan pipa seamless untuk cooling water system',
+            'approved_by' => null,
+            'approved_at' => null,
+        ]);
+
+        PurchaseRequestDetail::create([
+            'purchase_request_id' => $pr2->id,
+            'item_id' => $item2->id, // Seamless Pipe
+            'qty' => 120,
+            'estimated_price' => 7500000,
+            'remarks' => 'Panjang standard 6 meter per batang',
+        ]);
+
+        ApprovalLog::create([
+            'reference_type' => 'purchase_request',
+            'reference_id' => $pr2->id,
+            'action' => 'submitted',
+            'notes' => 'Harap segera di-review, material ini long-lead item',
+            'acted_by' => $projectUser->id,
+            'acted_at' => now()->subDays(2),
+        ]);
+
+        // PR 3: Draft (Waiting to be submitted)
+        $pr3 = PurchaseRequest::create([
+            'pr_number' => 'PR-EPC-' . date('Ym') . '-0003',
+            'project_id' => $project1->id,
+            'department_id' => $engineeringDept->id,
+            'requested_by' => $projectUser->id,
+            'request_date' => now(),
+            'status' => 'draft',
+            'notes' => 'Draft PR untuk kebutuhan material plate pondasi',
+            'approved_by' => null,
+            'approved_at' => null,
+        ]);
+
+        PurchaseRequestDetail::create([
+            'purchase_request_id' => $pr3->id,
+            'item_id' => $item1->id, // Steel Plate
+            'qty' => 30,
+            'estimated_price' => 3500000,
+            'remarks' => 'Untuk base plate pompa',
+        ]);
     }
 }
