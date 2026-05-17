@@ -13,14 +13,10 @@ const useAuthStore = create((set) => ({
     try {
       const response = await api.post('/auth/login', { email, password });
       
-      const token = response.data.access_token;
+      const token = response.data.data.access_token;
+      const user = response.data.data.user;
       
-      // After getting token, we need to fetch the user profile
       localStorage.setItem('auth_token', token);
-      
-      const userResponse = await api.get('/auth/me');
-      const user = userResponse.data.data;
-      
       localStorage.setItem('auth_user', JSON.stringify(user));
       
       set({ 

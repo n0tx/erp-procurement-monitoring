@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router';
 import Login from './pages/Login';
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/Dashboard';
+import PurchaseRequestsList from './pages/PurchaseRequestsList';
 import Placeholder from './components/Placeholder';
 import useAuthStore from './store/authStore';
 
@@ -50,8 +51,10 @@ function App() {
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         
+        {/* Module Routes */}
+        <Route path="purchase-requests" element={<PurchaseRequestsList />} />
+        
         {/* Placeholder Routes for Sidebar Menus */}
-        <Route path="purchase-requests" element={<Placeholder />} />
         <Route path="vendor-quotations" element={<Placeholder />} />
         <Route path="purchase-orders" element={<Placeholder />} />
         <Route path="projects" element={<Placeholder />} />
