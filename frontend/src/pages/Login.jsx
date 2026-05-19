@@ -28,9 +28,10 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const fillCredentials = (email) => {
+  const handleDemoLogin = (email) => {
     setValue('email', email);
     setValue('password', 'password');
+    onSubmit({ email, password: 'password' });
   };
 
   const onSubmit = async (data) => {
@@ -134,7 +135,7 @@ const Login = () => {
                 <div className="w-full border-t border-slate-200" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-slate-500">Demo Accounts (click to fill)</span>
+                <span className="px-2 bg-white text-slate-500">Demo Accounts (click to login)</span>
               </div>
             </div>
             
@@ -143,7 +144,7 @@ const Login = () => {
                 <button
                   key={account.email}
                   type="button"
-                  onClick={() => fillCredentials(account.email)}
+                  onClick={() => handleDemoLogin(account.email)}
                   className={`text-left px-3 py-2.5 rounded-lg border text-xs transition-colors cursor-pointer ${account.color}`}
                 >
                   <span className="font-bold block">{account.role}</span>
