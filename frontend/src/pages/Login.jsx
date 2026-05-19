@@ -12,14 +12,26 @@ const loginSchema = z.object({
   password: z.string().min(1, 'Password wajib diisi'),
 });
 
+const demoAccounts = [
+  { email: 'admin@demo-epc.com', role: 'Admin', desc: 'Full access to all modules', color: 'bg-indigo-50 border-indigo-200 text-indigo-700 hover:bg-indigo-100' },
+  { email: 'project@demo-epc.com', role: 'Project User', desc: 'Create & submit PR', color: 'bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100' },
+  { email: 'manager@demo-epc.com', role: 'Approver', desc: 'Approve / Reject PR', color: 'bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100' },
+  { email: 'procurement@demo-epc.com', role: 'Procurement', desc: 'Quotation, PO & vendor mgmt', color: 'bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100' },
+];
+
 const Login = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
   const isLoading = useAuthStore((state) => state.isLoading);
   
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
     resolver: zodResolver(loginSchema),
   });
+
+  const fillCredentials = (email) => {
+    setValue('email', email);
+    setValue('password', 'password');
+  };
 
   const onSubmit = async (data) => {
     const result = await login(data.email, data.password);
@@ -115,15 +127,33 @@ const Login = () => {
             
           </form>
           
+          {/* Demo Credentials Section */}
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-slate-200" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-slate-500">Internal Use Only</span>
+                <span className="px-2 bg-white text-slate-500">Demo Accounts (click to fill)</span>
               </div>
             </div>
+            
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {demoAccounts.map((account) => (
+                <button
+                  key={account.email}
+                  type="button"
+                  onClick={() => fillCredentials(account.email)}
+                  className={`text-left px-3 py-2.5 rounded-lg border text-xs transition-colors cursor-pointer ${account.color}`}
+                >
+                  <span className="font-bold block">{account.role}</span>
+                  <span className="opacity-75 block mt-0.5">{account.desc}</span>
+                </button>
+              ))}
+            </div>
+            <p className="text-center text-xs text-slate-400 mt-3">
+              Password for all accounts: <code className="bg-slate-100 px-1.5 py-0.5 rounded font-semibold text-slate-600">password</code>
+            </p>
           </div>
         </div>
       </div>
