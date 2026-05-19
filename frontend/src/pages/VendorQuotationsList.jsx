@@ -11,10 +11,13 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import StatusBadge from '../components/StatusBadge';
+import useAuthStore from '../store/authStore';
 
 
 
 const VendorQuotationsList = () => {
+  const { user } = useAuthStore();
+  const userRole = user?.roles?.[0]?.name?.toLowerCase() || 'admin';
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const initialStatus = searchParams.get('status') || 'all';
@@ -58,15 +61,17 @@ const VendorQuotationsList = () => {
             Compare and evaluate price quotes from various vendors.
           </p>
         </div>
-        <div>
-          <button
-            onClick={() => navigate('/vendor-quotations/create')}
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            Input Quotation
-          </button>
-        </div>
+        {['admin', 'procurement'].includes(userRole) && (
+          <div>
+            <button
+              onClick={() => navigate('/vendor-quotations/create')}
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Input Quotation
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">

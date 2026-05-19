@@ -25,15 +25,19 @@ const DashboardLayout = () => {
     navigate('/login');
   };
 
-  const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-    { name: 'Purchase Requests', path: '/purchase-requests', icon: ShoppingCart },
-    { name: 'Vendor Quotations', path: '/vendor-quotations', icon: FileText },
-    { name: 'Purchase Orders', path: '/purchase-orders', icon: Package },
-    { name: 'Projects', path: '/projects', icon: Briefcase },
-    { name: 'Vendors', path: '/vendors', icon: Building2 },
-    { name: 'Approval Logs', path: '/approval-logs', icon: CheckSquare },
+  const userRole = user?.roles?.[0]?.name?.toLowerCase() || 'admin';
+
+  const allNavItems = [
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'project_user', 'approver', 'procurement'] },
+    { name: 'Purchase Requests', path: '/purchase-requests', icon: ShoppingCart, roles: ['admin', 'project_user', 'approver', 'procurement'] },
+    { name: 'Vendor Quotations', path: '/vendor-quotations', icon: FileText, roles: ['admin', 'procurement'] },
+    { name: 'Purchase Orders', path: '/purchase-orders', icon: Package, roles: ['admin', 'procurement'] },
+    { name: 'Projects', path: '/projects', icon: Briefcase, roles: ['admin', 'project_user'] },
+    { name: 'Vendors', path: '/vendors', icon: Building2, roles: ['admin', 'procurement'] },
+    { name: 'Approval Logs', path: '/approval-logs', icon: CheckSquare, roles: ['admin', 'approver'] },
   ];
+
+  const navItems = allNavItems.filter(item => item.roles.includes(userRole));
 
   return (
     <div className="min-h-screen bg-slate-50 flex">
