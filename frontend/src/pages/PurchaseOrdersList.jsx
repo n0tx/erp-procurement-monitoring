@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router';
+import { Link, useSearchParams, useNavigate } from 'react-router';
 import api from '../services/api';
 import { 
   Search, 
   Package, 
   ChevronRight, 
   Loader2,
-  Filter
+  Filter,
+  Plus
 } from 'lucide-react';
 import { format } from 'date-fns';
 import StatusBadge from '../components/StatusBadge';
@@ -14,6 +15,7 @@ import StatusBadge from '../components/StatusBadge';
 
 
 const PurchaseOrdersList = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const initialStatus = searchParams.get('status') || 'all';
 
@@ -55,6 +57,15 @@ const PurchaseOrdersList = () => {
           <p className="mt-1 text-sm text-slate-500">
             Track and manage material orders sent to vendors.
           </p>
+        </div>
+        <div>
+          <button
+            onClick={() => navigate('/purchase-orders/create')}
+            className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Generate PO
+          </button>
         </div>
       </div>
 

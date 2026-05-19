@@ -7,8 +7,10 @@ import PurchaseRequestDetail from './pages/PurchaseRequestDetail';
 import PurchaseRequestForm from './pages/PurchaseRequestForm';
 import VendorQuotationsList from './pages/VendorQuotationsList';
 import VendorQuotationDetail from './pages/VendorQuotationDetail';
+import VendorQuotationForm from './pages/VendorQuotationForm';
 import PurchaseOrdersList from './pages/PurchaseOrdersList';
 import PurchaseOrderDetail from './pages/PurchaseOrderDetail';
+import PurchaseOrderForm from './pages/PurchaseOrderForm';
 import ApprovalLogsList from './pages/ApprovalLogsList';
 import ProjectsList from './pages/ProjectsList';
 import VendorsList from './pages/VendorsList';
@@ -65,8 +67,10 @@ function App() {
         <Route path="purchase-requests/create" element={<PurchaseRequestForm />} />
         <Route path="purchase-requests/:id" element={<PurchaseRequestDetail />} />
         <Route path="vendor-quotations" element={<VendorQuotationsList />} />
+        <Route path="vendor-quotations/create" element={<VendorQuotationForm />} />
         <Route path="vendor-quotations/:id" element={<VendorQuotationDetail />} />
         <Route path="purchase-orders" element={<PurchaseOrdersList />} />
+        <Route path="purchase-orders/create" element={<PurchaseOrderForm />} />
         <Route path="purchase-orders/:id" element={<PurchaseOrderDetail />} />
         
         <Route path="projects" element={<ProjectsList />} />
