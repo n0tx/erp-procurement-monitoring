@@ -17,25 +17,9 @@ import {
 import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
+import StatusBadge from '../components/StatusBadge';
 
-const StatusBadge = ({ status }) => {
-  const styles = {
-    pending: 'bg-amber-100 text-amber-700 border-amber-200',
-    selected: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    rejected: 'bg-red-100 text-red-700 border-red-200',
-  };
 
-  const currentStyle = styles[status] || 'bg-slate-100 text-slate-700';
-
-  return (
-    <span className={`px-3 py-1.5 text-sm font-semibold rounded-full border capitalize flex items-center gap-1.5 w-max ${currentStyle}`}>
-      {status === 'selected' && <CheckCircle className="w-4 h-4" />}
-      {status === 'rejected' && <XCircle className="w-4 h-4" />}
-      {status === 'pending' && <Clock className="w-4 h-4" />}
-      {status}
-    </span>
-  );
-};
 
 const VendorQuotationDetail = () => {
   const { id } = useParams();

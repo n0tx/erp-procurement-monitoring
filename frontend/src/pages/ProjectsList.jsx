@@ -8,23 +8,9 @@ import {
   Filter
 } from 'lucide-react';
 import { format } from 'date-fns';
+import StatusBadge from '../components/StatusBadge';
 
-const StatusBadge = ({ status }) => {
-  const styles = {
-    planning: 'bg-amber-100 text-amber-700 border-amber-200',
-    running: 'bg-indigo-100 text-indigo-700 border-indigo-200',
-    completed: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    on_hold: 'bg-slate-100 text-slate-700 border-slate-200',
-  };
 
-  const currentStyle = styles[status] || 'bg-slate-100 text-slate-700';
-
-  return (
-    <span className={`px-2.5 py-1 text-xs font-medium rounded-full border capitalize ${currentStyle}`}>
-      {status.replace('_', ' ')}
-    </span>
-  );
-};
 
 const ProjectsList = () => {
   const [projects, setProjects] = useState([]);

@@ -10,22 +10,9 @@ import {
   Plus
 } from 'lucide-react';
 import { format } from 'date-fns';
+import StatusBadge from '../components/StatusBadge';
 
-const StatusBadge = ({ status }) => {
-  const styles = {
-    pending: 'bg-amber-100 text-amber-700',
-    selected: 'bg-emerald-100 text-emerald-700',
-    rejected: 'bg-red-100 text-red-700',
-  };
 
-  const currentStyle = styles[status] || 'bg-slate-100 text-slate-700';
-
-  return (
-    <span className={`px-2.5 py-1 text-xs font-medium rounded-full capitalize ${currentStyle}`}>
-      {status}
-    </span>
-  );
-};
 
 const VendorQuotationsList = () => {
   const [searchParams] = useSearchParams();
